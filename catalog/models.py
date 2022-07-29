@@ -10,7 +10,7 @@ sprouter = models.ForeignKey(
 )
 
 
-class Plant(models.model):
+class Plant(models.Model):
     """respresents plants available to be tracked."""
     scientific_name = models.CharField(
         max_length=200,
