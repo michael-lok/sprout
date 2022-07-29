@@ -30,6 +30,9 @@ output <- apply(df2, MARGIN=1, FUN=function(X){
     )
 })
 
+# assign primary key
+for (i in c(1:length(output))) {output[[i]]$pk = i}
+
 
 if (nrow(dupes) == 0) {
     write_json(
