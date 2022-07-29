@@ -37,8 +37,8 @@ sprouter {
     first_name varchar
     last_name varchar
     email varchar
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 plant {
@@ -46,8 +46,8 @@ plant {
     scientific_name varchar
     common_name varchar
     custom_plant boolean
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 possession {
@@ -58,8 +58,8 @@ possession {
     days_water int
     days_fertilize int
     days_repot int
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 activityLog {
@@ -67,8 +67,8 @@ activityLog {
     possession_id int
     action varchar
     activity_date date
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 
