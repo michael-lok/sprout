@@ -2,9 +2,10 @@
 # plants. deduplication occurs to ensure the scientific name provided
 # by the USDA (which may also contain the author's name) is deduplicated.
 library(dplyr)
+library(jsonlite)
 
 
-df = read.csv("~/projects/sprout/docs/plants.csv")
+df <- read.csv("~/projects/sprout/docs/plants.csv")
 
 df2 <- df %>%
     select(Scientific.Name.with.Author, Common.Name) %>%
@@ -15,12 +16,27 @@ df2 <- df %>%
     arrange(scientific_name, desc(common_name)) %>%
     filter(!duplicated(scientific_name))
 
-dupes = df2 %>%
+dupes <- df2 %>%
     group_by(scientific_name) %>%
     filter(duplicated(scientific_name, fromLast=TRUE))
 
+output <- apply(df2, MARGIN=1, FUN=function(X){
+    list(
+        model="planttracker.plant",
+        fields=list(
+            scientific_name=X["scientific_name"],
+            common_name=X["common_name"]
+        )
+    )
+})
+
+
 if (nrow(dupes) == 0) {
-    write.csv(df2, "projects/sprout/docs/plants_input.csv", row.names=FALSE)
+    write_json(
+        output,
+        path="~/projects/sprout/planttracker/fixtures/plant.json",
+        auto_unbox=TRUE, pretty=TRUE, null="null"
+    )
 } else {
     stop(sprintf("duplicates in data (%n)", nrow(dupes)))
 }
