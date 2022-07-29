@@ -32,7 +32,7 @@
 ```mermaid
 erDiagram
 
-user {
+sprouter {
     id int
     first_name varchar
     last_name varchar
@@ -52,7 +52,7 @@ plant {
 
 possession {
     id int
-    user_id int
+    sprouter_id int
     plant_id int
     nickname varchar
     days_water int
@@ -72,7 +72,7 @@ activityLog {
 }
 
 
-user ||--o{ possession : ""
+sprouter ||--o{ possession : ""
 possession }o--|| plant : ""
 possession ||--o{ activityLog : ""
 ```
@@ -97,9 +97,9 @@ select
     r.last_watered,
     r.last_fertilized,
     r.last_repotted
-from user u
+from sprouter u
 join posession ps
-    on u.id = ps.user_id
+    on u.id = ps.sprouter_id
 join plant p
     on p.id = ps.plant_id
 join recent r
