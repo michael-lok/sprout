@@ -32,13 +32,13 @@
 ```mermaid
 erDiagram
 
-user {
+sprouter {
     id int
     first_name varchar
     last_name varchar
     email varchar
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 plant {
@@ -46,35 +46,35 @@ plant {
     scientific_name varchar
     common_name varchar
     custom_plant boolean
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 possession {
     id int
-    user_id int
+    sprouter_id int
     plant_id int
     nickname varchar
     days_water int
     days_fertilize int
     days_repot int
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
-activityLog {
+activity {
     id int
     possession_id int
     action varchar
     activity_date date
-    created_at timestamp
-    updated_at timestamp
+    created timestamp
+    updated timestamp
 }
 
 
-user ||--o{ possession : ""
+sprouter ||--o{ possession : ""
 possession }o--|| plant : ""
-possession ||--o{ activityLog : ""
+possession ||--o{ activity : ""
 ```
 
 ## potential queries
@@ -87,7 +87,7 @@ recent as (
         max(case when action = 'watered' then activity_date else null end) as last_watered,
         max(case when action = 'fertilized' then activity_date else null end) as last_fertilized,
         max(case when action = 'repotted' then activity else null end) as last_repotted
-    from activityLog
+    from activity
     group by posession_id
 )
 
@@ -97,9 +97,9 @@ select
     r.last_watered,
     r.last_fertilized,
     r.last_repotted
-from user u
+from sprouter u
 join posession ps
-    on u.id = ps.user_id
+    on u.id = ps.sprouter_id
 join plant p
     on p.id = ps.plant_id
 join recent r
