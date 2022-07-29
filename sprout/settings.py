@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # sprout apps
-    'catalog.apps.CatalogConfig'
+    'planttracker.apps.CatalogConfig'
 ]
 
 MIDDLEWARE = [
