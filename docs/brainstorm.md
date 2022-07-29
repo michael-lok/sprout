@@ -62,7 +62,7 @@ possession {
     updated timestamp
 }
 
-activityLog {
+activity {
     id int
     possession_id int
     action varchar
@@ -74,7 +74,7 @@ activityLog {
 
 sprouter ||--o{ possession : ""
 possession }o--|| plant : ""
-possession ||--o{ activityLog : ""
+possession ||--o{ activity : ""
 ```
 
 ## potential queries
@@ -87,7 +87,7 @@ recent as (
         max(case when action = 'watered' then activity_date else null end) as last_watered,
         max(case when action = 'fertilized' then activity_date else null end) as last_fertilized,
         max(case when action = 'repotted' then activity else null end) as last_repotted
-    from activityLog
+    from activity
     group by posession_id
 )
 
