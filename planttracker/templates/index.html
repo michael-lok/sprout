@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Sprout Home</h1>
+  <p>Welcome to Sprout, a website designed by <em>YokkiloLamechi</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Plants:</strong> {{ num_plants }}</li>
+    <li><strong>Possessions:</strong> {{ num_possessions }}</li>
+    <li><strong>Sprouters:</strong> {{ num_sprouters }}</li>
+  </ul>
+{% endblock %}
