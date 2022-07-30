@@ -1,7 +1,9 @@
+from django.contrib import auth, messages
 from django.db.models import Count
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 
+from .forms import NewUserForm
 from .models import (
     Plant,
     Possession,
@@ -27,6 +29,22 @@ def index(request):
             "num_possessions": num_possessions,
             "num_activity": num_activity
         }
+    )
+
+
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			auth.login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("index")
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	return render(
+        request=request,
+        template_name="planttracker/register.html",
+        context={"register_form":NewUserForm()}
     )
 
 
