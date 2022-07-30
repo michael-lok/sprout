@@ -24,7 +24,7 @@ class Plant(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse("model-detail-view", args=[str(self.id)])
+        return reverse("plant-detail", args=[str(self.id)])
 
     def __str__(self):
         return f"{self.common_name} ({self.scientific_name})"
@@ -67,7 +67,7 @@ class Possession(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse("model-detail-view", args=[str(self.id)])
+        return reverse("possession-detail", args=[str(self.id)])
     
     def __str__(self):
         return self.nickname

@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Plant List</h1>
+  {% if plant_list %}
+  <ul>
+    {% for plant in plant_list %}
+      <li>
+        <a href="{{ plant.get_absolute_url }}">{{ plant.scientific_name }}</a> ({{book.common_name}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no plants registered in the catalog.</p>
+  {% endif %}
+{% endblock %}

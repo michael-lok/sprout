@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Scientific Name: {{ plant.scientific_name }}</h1>
+
+  <p><strong>Common Name:</strong> <a href="">{{ plant.common_name }}</a></p>
+  <p><strong>Custom Plant:</strong> {{ plant.custom_plant }}</p>
+  <p><strong>Created:</strong> {{ plant.created }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Sprouters that Own {{ plant.scientific_name }}</h4>
+  </div>
+{% endblock %}

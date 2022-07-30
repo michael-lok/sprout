@@ -33,3 +33,16 @@ def index(request):
 class PlantView(generic.ListView):
     model = Plant
     paginate_by = 10
+
+
+class PlantDetailView(generic.DetailView):
+    model = Plant
+
+
+class PossessionView(generic.ListView):
+    model = Possession
+    pageinate_by = 10
+
+
+class PossessionDetailView(generic.DetailView):
+    model = Possession
