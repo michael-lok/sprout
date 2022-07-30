@@ -14,10 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf import settings
-from django.conf.urls import static
-from django.urls import path
+from django.urls import include, path
+from django.views.generic import RedirectView
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("planttracker/", include("planttracker.urls"))
+]
+
+
+# redirect base url of our application to planttracker
+urlpatterns += [
+    path("", RedirectView.as_view(url="/planttracker/", permanent=True))
+]
+
+
+# authentication urls (for login, logout, password management)
+#Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls'))
 ]

@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Possessions List</h1>
+  {% if possession_list %}
+  <ul>
+    {% for p in possession_list %}
+      <li>
+        <a href="{{ p.get_absolute_url }}">{{ p.nickname }}</a> ({{p.sprouter_id}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are currently no possessions to retrieve.</p>
+  {% endif %}
+{% endblock %}
