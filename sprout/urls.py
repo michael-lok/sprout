@@ -15,10 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import RedirectView
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("planttracker/", include("planttracker.urls")),
-    path("accounts/", include("django.contrib.auth.urls"))
+    path("planttracker/", include("planttracker.urls"))
+]
+
+
+# redirect base url of our application to planttracker
+urlpatterns += [
+    path("", RedirectView.as_view(url="/planttracker/", permanent=True))
+]
+
+
+# authentication urls (for login, logout, password management)
+#Add Django site authentication urls (for login, logout, password management)
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
